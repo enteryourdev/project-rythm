@@ -28,6 +28,10 @@ function makeBoard(arr: string[][] = board, arr2: string[]) {
     console.log(arr2.map(c => `[${c}]`).join(" "));
 }
 
+function boardPrint(){
+    //this prints the board, it takes in setInterval numer input
+}
+
 function makePlayableZone() {
     //
 }
@@ -49,12 +53,13 @@ function fall(){
     //this handles the falling of the blocks. 
     //it takes: 
     //in technical: 
-    //1.
+    //1. arr[i][spawn j] i-- only falling effect
     //2.
     //3.
 }
 function fallSpeed(){
     //this handles the falling speed, as in the difficulty.
+    //this should return a number
 }
 function setDifficulty(){
 

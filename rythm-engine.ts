@@ -50,8 +50,13 @@ function randomKeySpawn() {
 function readSongSheet() {
     //
 }
-function spawn(){
+function spawn(arr: string[][]): string[][] {
     //this handles the spawning of the blocks
+
+
+
+    return arr;
+
 }
 function fall(arr: string[][]): string[][]{
     //this handles the falling of the blocks. 
@@ -60,6 +65,14 @@ function fall(arr: string[][]): string[][]{
     //1. arr[i][spawn j] i-- only falling effect
     //2.
     //3.
+    //isvalid? 
+    for (let i = 0; i < arr.length; i++){
+        for (let j = 0; j < arr[i].length; j++){
+
+        }
+    }
+    return arr;
+
 }
 function fallSpeed(n: number){
     //this handles the falling speed, as in the difficulty.

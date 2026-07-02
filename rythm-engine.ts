@@ -71,16 +71,7 @@ function fall(arr: string[][]): string[][]{
     //2.
     //3.
     //isvalid? 
-    for (let i = 0; i < arr.length; i++){
-        for (let j = 0; j < arr[i].length; j++){
-            if (arr[i][j] !== " "){
-                if (i + 1 < arr.length && arr[i + 1][j] === " "){
-                    arr[i + 1][j] = arr[i][j];
-                    arr[i][j] = " ";
-                }
-        }
-    }
-    return arr;
+
 
 }
 

@@ -18,10 +18,15 @@ const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
     [" ", " ", " ", " "],
     [" ", " ", " ", " "],
-    [" ", " ", " ", " "]];
+    [" ", " ", " ", " "],
+[" ", " ", " ", " "],
+[" ", " ", " ", " "]];
 
 const playableZone: string[] = ["←", "→", "↑", "↓"];  
 
+const voidZone: string[] = [" ", " ", " ", " "];
+
+type arrowDirection = "left" | "right" | "up" | "down";
 
 function makeBoard(arr: string[][] = board, arr2: string[]): string[][] {
     //this function will create the board and playable zone
@@ -68,12 +73,17 @@ function fall(arr: string[][]): string[][]{
     //isvalid? 
     for (let i = 0; i < arr.length; i++){
         for (let j = 0; j < arr[i].length; j++){
-
+            if (arr[i][j] !== " "){
+                if (i + 1 < arr.length && arr[i + 1][j] === " "){
+                    arr[i + 1][j] = arr[i][j];
+                    arr[i][j] = " ";
+                }
         }
     }
     return arr;
 
 }
+
 function fallSpeed(n: number){
     //this handles the falling speed, as in the difficulty.
     //this should return a number

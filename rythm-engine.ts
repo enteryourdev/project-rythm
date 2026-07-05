@@ -92,7 +92,9 @@ function fall(arr: string[][]): string[][]{
                 arr[i][j] = " ";
             }
         }
-    }return arr
+    }arr[arr.length] = [" ", " ", " ", " "];
+    arr[0] = [" ", " ", " ", " "]
+    return arr
 }
 
 function fallSpeed(n: number){

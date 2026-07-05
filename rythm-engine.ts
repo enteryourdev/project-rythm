@@ -64,15 +64,11 @@ function spawn(arr: string[][]): string[][] {
 
 }
 function fall(arr: string[][]): string[][]{
-    //this handles the falling of the blocks. 
-    //it takes: 
-    //in technical: 
-    //1. arr[i][spawn j] i-- only falling effect
-    //2.
-    //3.
-    //isvalid? 
-
-
+    for (let i = arr.length - 2; i >= 0; i--){
+        for (let j = 0; j < arr[i].length; j++ ){
+            
+        }
+    }
 }
 
 function fallSpeed(n: number){

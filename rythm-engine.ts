@@ -9,10 +9,12 @@ scoring and combos.
 -
 -
 
+glowing arrows or different looking arrows <- ← so its noticable
 
 question i need to ask:
 is it possible to overlay so it can actually overlap the text
 */
+const startProgramTime = performance.now();
 
 const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
@@ -42,19 +44,38 @@ function boardPrint(){
 }
 
 function makePlayableZone() {
-    //
+    //this is where you can play the zone
 }
 
 function readInput() {
-    //
+    //this is where it recognizes the input
 }
-function randomKeySpawn() {
-    //
+
+
+function randomKeySpawn(arr: string[][]): string[][] {
+    //random key spawn without song sheet.
+    const randomizedVar: number = Math.floor(Math.random() * arr.length);
+        switch(randomizedVar){
+            case 0:
+            arr[0][randomizedVar] = "<"
+            break;
+            case 1:
+            arr[0][randomizedVar] = ">"
+            break;
+            case 2:
+            arr[0][randomizedVar] = "^"
+            break;
+            case 3:
+            arr[0][randomizedVar] = "⌄"
+            break;
+        }return arr;
+    }
 }
 
 function readSongSheet() {
     //
 }
+
 function spawn(arr: string[][]): string[][] {
     //this handles the spawning of the blocks
 
@@ -66,17 +87,22 @@ function spawn(arr: string[][]): string[][] {
 function fall(arr: string[][]): string[][]{
     for (let i = arr.length - 2; i >= 0; i--){
         for (let j = 0; j < arr[i].length; j++ ){
-            
+            if (arr[i][j] !== " "){
+                arr[i+1][j] = arr[i][j];
+                arr[i][j] = " ";
+            }
         }
-    }
+    }return arr
 }
 
 function fallSpeed(n: number){
     //this handles the falling speed, as in the difficulty.
     //this should return a number
 }
+
 function setDifficulty(){
 // sets fall speed 
+    fallSpeed(500); // default speed is 500ms
 }
 
 class RythmEngine {

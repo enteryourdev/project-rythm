@@ -37,6 +37,7 @@ function makeBoard(arr: string[][] = board, arr2: string[]): string[][] {
     console.log(arr2.map(c => `[${c}]`).join(" "));
     const newArray = arr.concat(arr2);
     return newArray;
+}
 
 function boardPrint(){
     //this prints the board, it takes in setInterval numer input
@@ -58,7 +59,7 @@ function randomKeySpawn(arr: string[][]): string[][] {
     //find if there is empty first.
     const emptyCells: number[] = [];
     for (let i = 0; i < arr[0].length; i++){
-        if(arr[0][i] !== " ") emptyCells.push(i);
+        if(arr[0][i] === " ") emptyCells.push(i);
     }
 
     if (emptyCells.length > 0){
@@ -81,12 +82,10 @@ function randomKeySpawn(arr: string[][]): string[][] {
                 arr[0][getIdxValue] = "⌄"
                 break;
             }
-        }else{
-        //basically run it again?
         }
+    
     }
     return arr;
-    }
 }
 
 function readSongSheet() {

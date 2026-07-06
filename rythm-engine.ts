@@ -14,8 +14,10 @@ glowing arrows or different looking arrows <- ← so its noticable
 question i need to ask:
 is it possible to overlay so it can actually overlap the text
 */
+type Milisecond = 300 | 333 | 400 | 500 | 800 | 1000;
+type ArrowDirection = "left" | "right" | "up" | "down";
+type Difficulty = "easy" | "easy+" | "medium" | "medium+" | "hard" | "extreme"
 const startProgramTime = performance.now();
-
 const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
     [" ", " ", " ", " "],
@@ -23,12 +25,17 @@ const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
 [" ", " ", " ", " "],
 [" ", " ", " ", " "]];
-
 const playableZone: string[] = ["←", "→", "↑", "↓"];  
-
 const voidZone: string[] = [" ", " ", " ", " "];
 
-type arrowDirection = "left" | "right" | "up" | "down";
+/*
+const arrowMap: Record<arrowDirection, string> = {
+    left: "←",
+    right: "→",
+    up: "↑",
+    down: "↓"
+};
+*/
 
 function makeBoard(arr: string[][] = board, arr2: string[]): string[][] {
     //this function will create the board and playable zone
@@ -112,6 +119,7 @@ function fall(arr: string[][]): string[][]{
     arr[0] = [" ", " ", " ", " "]
     return arr
 }
+
 
 function fallSpeed(n: number){
     //this handles the falling speed, as in the difficulty.

@@ -54,21 +54,38 @@ function readInput() {
 
 function randomKeySpawn(arr: string[][]): string[][] {
     //random key spawn without song sheet.
-    const randomizedVar: number = Math.floor(Math.random() * arr.length);
-        switch(randomizedVar){
-            case 0:
-            arr[0][randomizedVar] = "<"
-            break;
-            case 1:
-            arr[0][randomizedVar] = ">"
-            break;
-            case 2:
-            arr[0][randomizedVar] = "^"
-            break;
-            case 3:
-            arr[0][randomizedVar] = "⌄"
-            break;
-        }return arr;
+
+    //find if there is empty first.
+    const emptyCells: number[] = [];
+    for (let i = 0; i < arr[0].length; i++){
+        if(arr[0][i] !== " ") emptyCells.push(i);
+    }
+
+    if (emptyCells.length > 0){
+
+        const idx: number = Math.floor(Math.random() * emptyCells.length);
+        const getIdxValue = emptyCells[idx];
+
+        if (arr[0][getIdxValue] === " "){
+            switch(getIdxValue){
+                case 0:
+                arr[0][getIdxValue] = "<"
+                break;
+                case 1:
+                arr[0][getIdxValue] = ">"
+                break;
+                case 2:
+                arr[0][getIdxValue] = "^"
+                break;
+                case 3:
+                arr[0][getIdxValue] = "⌄"
+                break;
+            }
+        }else{
+        //basically run it again?
+        }
+    }
+    return arr;
     }
 }
 

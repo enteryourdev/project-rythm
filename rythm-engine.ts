@@ -116,7 +116,6 @@ function fall(arr: string[][]): string[][]{
             }
         }
     }arr[arr.length] = [" ", " ", " ", " "];
-    arr[0] = [" ", " ", " ", " "]
     return arr
 }
 
@@ -126,7 +125,7 @@ function fallSpeed(n: number){
     //this should return a number
 }
 
-function setDifficulty(){
+function setDifficulty(diff: Difficulty){
 // sets fall speed 
     fallSpeed(500); // default speed is 500ms
 }

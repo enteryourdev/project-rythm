@@ -14,9 +14,17 @@ glowing arrows or different looking arrows <- ← so its noticable
 question i need to ask:
 is it possible to overlay so it can actually overlap the text
 */
-type Milisecond = 300 | 333 | 400 | 500 | 800 | 1000;
+type Millisecond = 300 | 333 | 400 | 500 | 800 | 1000;
 type ArrowDirection = "left" | "right" | "up" | "down";
 type Difficulty = "easy" | "easy+" | "medium" | "medium+" | "hard" | "extreme"
+const DifficultyRecord: Record<Difficulty, Millisecond> = {
+    easy: 1000,
+    "easy+": 800,
+    medium: 500,
+    "medium+": 400,
+    hard: 333,
+    extreme: 300
+}
 const startProgramTime = performance.now();
 const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
@@ -120,15 +128,23 @@ function fall(arr: string[][]): string[][]{
 }
 
 
-function fallSpeed(n: number){
+function fallSpeed(n: Millisecond){
     //this handles the falling speed, as in the difficulty.
     //this should return a number
+    
 }
 
 function setDifficulty(diff: Difficulty){
 // sets fall speed 
-    fallSpeed(500); // default speed is 500ms
+// or any other difficulty modifier, but currently sets speed
+    fallSpeed(DifficultyRecord[diff]); // default speed is 500ms
 }
+
+/*
+>   CLASS SECTION
+>   
+>   
+*/
 
 class RythmEngine {
     constructor() {

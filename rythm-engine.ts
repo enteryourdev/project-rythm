@@ -60,7 +60,7 @@ function makeBoard(arr: string[][] = board, arr2: string[]): string[][] {
     return newArray;
 }
 
-function boardPrint(){
+function boardPrint(arr: string[][]){
     //this prints the board, it takes in setInterval numer input
     //call fall(); per interval 
 }
@@ -158,18 +158,18 @@ function readSongSheet() {
 class RythmEngine {
     public speed: Millisecond = 500;
     public interval?: ReturnType<typeof setInterval>;
+    public board: string[][] = [];
 
     constructor() {
-        makeBoard(board, playableZone); // initializes the board
+        this.board = makeBoard(board, playableZone); // initializes the board, add void ig
     }
+
     startGame(){ // does everything
-        const initialStartTime = performance.now();
-        
-        if (initialStartTime > 3000){
-            spawn();
-            fall();
-            randomKeySpawn();
-        }
+    //spawn -> fall -> print board
+            spawn(this.board);
+            fall(this.board);
+            randomKeySpawn(this.board);
+            boardPrint(this.board);
     }
 
     
@@ -186,7 +186,7 @@ class RythmEngine {
     changeSpeed(n: Millisecond){
         this.speed = n;
         clearInterval(this.interval);
-        setTimeout(() => this.startInterval(), 3000);
+        setTimeout(() => this.startInterval(), 3000); //starts after 3 seconds
     }
 
 }

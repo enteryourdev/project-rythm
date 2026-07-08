@@ -156,12 +156,19 @@ function readSongSheet() {
 
 class RythmEngine {
     public speed: Millisecond = 500;
+    public interval?: ReturnType<typeof setInterval>;
 
     constructor() {
         makeBoard(board, playableZone);
     }
     startSettings(){
         this.speed = setDifficulty("easy");
+    }
+    startInterval(){
+        this.interval = setInterval(this.startGame,this.speed);
+    }
+    startGame(){
+
     }
 }
 

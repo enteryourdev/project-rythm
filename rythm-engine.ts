@@ -135,6 +135,7 @@ function fall(arr: string[][]): string[][]{
 function fallSpeed(n: Millisecond): Millisecond{
     //this handles the falling speed, as in the difficulty.
     //this should return a number
+    rythmEngine.stopInterval();
     return n;
 }
 function setDifficulty(diff: Difficulty): Millisecond{
@@ -159,17 +160,35 @@ class RythmEngine {
     public interval?: ReturnType<typeof setInterval>;
 
     constructor() {
-        makeBoard(board, playableZone);
+        makeBoard(board, playableZone); // initializes the board
     }
+    startGame(){ // does everything
+        const initialStartTime = performance.now();
+        
+        if (initialStartTime > 3000){
+            spawn();
+            fall();
+            randomKeySpawn();
+        }
+    }
+
+    
     startSettings(){
         this.speed = setDifficulty("easy");
     }
-    startInterval(){
+    startInterval(){ //this should print out the board, and basically run the game.
         this.interval = setInterval(this.startGame,this.speed);
     }
-    startGame(){
 
+    stopInterval(){
+        clearInterval(this.interval);
     }
+    changeSpeed(n: Millisecond){
+        this.speed = n;
+        clearInterval(this.interval);
+        setTimeout(() => this.startInterval(), 3000);
+    }
+
 }
 
 const rythmEngine = new RythmEngine();

@@ -25,6 +25,12 @@ const DifficultyRecord: Record<Difficulty, Millisecond> = {
     hard: 333,
     extreme: 300
 }
+type Score = "Miss" | "Good" | "Perfect";
+const ScoreRecord: Record<Score, number> = {
+    "Miss": 0,
+    "Good": 1,
+    "Perfect": 3
+}
 const startProgramTime = performance.now();
 const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
@@ -103,18 +109,13 @@ function randomKeySpawn(arr: string[][]): string[][] {
     return arr;
 }
 
-function readSongSheet() {
-    //
-}
 
 function spawn(arr: string[][]): string[][] {
     //this handles the spawning of the blocks
 
-
-
     return arr;
-
 }
+
 function fall(arr: string[][]): string[][]{
     for (let i = arr.length - 2; i >= 0; i--){
         for (let j = 0; j < arr[i].length; j++ ){
@@ -128,17 +129,24 @@ function fall(arr: string[][]): string[][]{
 }
 
 
-function fallSpeed(n: Millisecond){
+//
+//setting section
+//
+function fallSpeed(n: Millisecond): Millisecond{
     //this handles the falling speed, as in the difficulty.
     //this should return a number
-    
+    return n;
 }
-
-function setDifficulty(diff: Difficulty){
+function setDifficulty(diff: Difficulty): Millisecond{
 // sets fall speed 
 // or any other difficulty modifier, but currently sets speed
-    fallSpeed(DifficultyRecord[diff]); // default speed is 500ms
+    return DifficultyRecord[diff]; // default speed is 500ms
 }
+function readSongSheet() {
+    //Handles Song Sheets
+}
+
+
 
 /*
 >   CLASS SECTION
@@ -147,8 +155,13 @@ function setDifficulty(diff: Difficulty){
 */
 
 class RythmEngine {
+    public speed: Millisecond = 500;
+
     constructor() {
         makeBoard(board, playableZone);
+    }
+    startSettings(){
+        this.speed = setDifficulty("easy");
     }
 }
 

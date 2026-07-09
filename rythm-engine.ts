@@ -14,6 +14,9 @@ glowing arrows or different looking arrows <- ← so its noticable
 question i need to ask:
 is it possible to overlay so it can actually overlap the text
 */
+import { pointRinger } from "./score";
+
+
 type Millisecond = 300 | 333 | 400 | 500 | 800 | 1000;
 type ArrowDirection = "left" | "right" | "up" | "down";
 type Difficulty = "easy" | "easy+" | "medium" | "medium+" | "hard" | "extreme"
@@ -114,10 +117,32 @@ function fall(arr: string[][]): string[][]{
                 arr[i][j] = " ";
             }
         }
-    }arr[arr.length] = [" ", " ", " ", " "];
+    }//arr[VOID_ROW] = [" ", " ", " ", " "];
+    // combos -> x => Object.values(FALLING).includes(x)
+    if(arr[VOID_ROW].some(x => x !== " ")) 
+    if(arr[CATCH_ROW].includes(" ")) arr[CATCH_ROW] = fallPlayableZone(arr[CATCH_ROW])
+
     return arr
 }
-
+function fallPlayableZone(arr: string[]): string[]{
+    //goal is to 
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] === " "){
+            arr[i] = playableZone[i];
+        }
+    }
+    return arr
+}
+export function fallVoidZone(arr: string[]): string[]{
+    //how many is in here? if its here, minus points for each one.
+    let totalMiss = 0;
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] !== " ") totalMiss++;
+        arr[i] = " "
+    }
+    pointRinger(totalMiss);
+    return arr
+}
 
 //
 //setting section

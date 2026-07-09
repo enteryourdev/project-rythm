@@ -119,8 +119,8 @@ function fall(arr: string[][]): string[][]{
         }
     }//arr[VOID_ROW] = [" ", " ", " ", " "];
     // combos -> x => Object.values(FALLING).includes(x)
-    if(arr[VOID_ROW].some(x => x !== " ")) 
-    if(arr[CATCH_ROW].includes(" ")) arr[CATCH_ROW] = fallPlayableZone(arr[CATCH_ROW])
+    if(arr[VOID_ROW].some(x => x !== " ")) arr[VOID_ROW] = fallVoidZone(arr[VOID_ROW]);
+    if(arr[CATCH_ROW].includes(" ")) arr[CATCH_ROW] = fallPlayableZone(arr[CATCH_ROW]);
 
     return arr
 }

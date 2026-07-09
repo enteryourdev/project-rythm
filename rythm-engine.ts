@@ -25,12 +25,6 @@ const DifficultyRecord: Record<Difficulty, Millisecond> = {
     hard: 333,
     extreme: 300
 }
-type Score = "Miss" | "Good" | "Perfect";
-const ScoreRecord: Record<Score, number> = {
-    "Miss": 0,
-    "Good": 1,
-    "Perfect": 3
-}
 const startProgramTime = performance.now();
 const board: string[][] = [[" ", " ", " ", " "],
     [" ", " ", " ", " "],
@@ -41,15 +35,6 @@ const board: string[][] = [[" ", " ", " ", " "],
 [" ", " ", " ", " "]];
 const playableZone: string[] = ["←", "→", "↑", "↓"];  
 const voidZone: string[] = [" ", " ", " ", " "];
-
-/*
-const arrowMap: Record<arrowDirection, string> = {
-    left: "←",
-    right: "→",
-    up: "↑",
-    down: "↓"
-};
-*/
 
 function makeBoard(arr: string[][] = board, arr2: string[]): string[][] {
     //this function will create the board and playable zone
@@ -162,10 +147,11 @@ class RythmEngine {
 
     constructor() {
         this.board = makeBoard(board, playableZone); // initializes the board, add void ig
+        boardPrint(this.board);
     }
 
     startGame(){ // does everything
-    //spawn -> fall -> print board
+    //spawn -> fall -> spawns key -> print board
             spawn(this.board);
             fall(this.board);
             randomKeySpawn(this.board);

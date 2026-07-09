@@ -35,13 +35,18 @@ const board: string[][] = [[" ", " ", " ", " "],
 [" ", " ", " ", " "]];
 const playableZone: string[] = ["←", "→", "↑", "↓"];  
 const voidZone: string[] = [" ", " ", " ", " "];
+let CATCH_ROW: number = 0;
+let VOID_ROW: number = 0;
+const FALLING: Record<string, string> = { "←": "<", "→": ">", "↑": "^", "↓": "v" };
 
-function makeBoard(arr: string[][] = board, arr2: string[]): string[][] {
+function makeBoard(arr: string[][] = board, playable: string[], voidZone: string[]): string[][] {
     //this function will create the board and playable zone
     //it 
     console.log(arr.map(row => row.map(c => `[${c}]`).join(" ")).join("\n"));
-    console.log(arr2.map(c => `[${c}]`).join(" "));
-    const newArray = arr.concat(arr2);
+    console.log(playable.map(c => `[${c}]`).join(" "));
+    const newArray = arr.concat([playable], [voidZone]);
+    CATCH_ROW = newArray.length-2
+    VOID_ROW = newArray.length-1
     return newArray;
 }
 
@@ -146,7 +151,7 @@ class RythmEngine {
     public board: string[][] = [];
 
     constructor() {
-        this.board = makeBoard(board, playableZone); // initializes the board, add void ig
+        this.board = makeBoard(board, playableZone, voidZone); // initializes the board, add void ig
         boardPrint(this.board);
     }
 

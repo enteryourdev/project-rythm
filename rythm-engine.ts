@@ -41,6 +41,7 @@ const voidZone: string[] = [" ", " ", " ", " "];
 let CATCH_ROW: number = 0;
 let VOID_ROW: number = 0;
 const FALLING: Record<string, string> = { "←": "<", "→": ">", "↑": "^", "↓": "v" };
+const FALLING_NOTE = Object.values(FALLING);
 
 function makeBoard(arr: string[][] = board, playable: string[], voidZone: string[]): string[][] {
     //this function will create the board and playable zone
@@ -137,7 +138,7 @@ export function fallVoidZone(arr: string[]): string[]{
     //how many is in here? if its here, minus points for each one.
     let totalMiss = 0;
     for (let i = 0; i < arr.length; i++){
-            if (Object.values(FALLING).includes(arr[i])){
+            if (FALLING_NOTE.includes(arr[i])){
                 totalMiss++;
         }
 

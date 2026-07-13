@@ -118,7 +118,7 @@ function fall(arr: string[][]): string[][]{
             }
         }
     }//arr[VOID_ROW] = [" ", " ", " ", " "];
-    // combos -> x => Object.values(FALLING).includes(x)
+    // combos -> arr[VOID_ROW].some(x => Object.values(FALLING).includes(x))
     if(arr[VOID_ROW].some(x => x !== " ")) arr[VOID_ROW] = fallVoidZone(arr[VOID_ROW]);
     if(arr[CATCH_ROW].includes(" ")) arr[CATCH_ROW] = fallPlayableZone(arr[CATCH_ROW]);
 
@@ -137,7 +137,10 @@ export function fallVoidZone(arr: string[]): string[]{
     //how many is in here? if its here, minus points for each one.
     let totalMiss = 0;
     for (let i = 0; i < arr.length; i++){
-        if (arr[i] !== " ") totalMiss++;
+            if (Object.values(FALLING).includes(arr[i])){
+                totalMiss++;
+        }
+
         arr[i] = " "
     }
     pointRinger(totalMiss);

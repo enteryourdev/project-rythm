@@ -40,7 +40,7 @@ const playableZone: string[] = ["←", "→", "↑", "↓"];
 const voidZone: string[] = [" ", " ", " ", " "];
 let CATCH_ROW: number = 0;
 let VOID_ROW: number = 0;
-const FALLING: Record<string, string> = { "←": "<", "→": ">", "↑": "^", "↓": "v" };
+const FALLING: Record<string, string> = { "←": "<", "→": ">", "↑": "^", "↓": "⌄" };
 const FALLING_NOTE = Object.values(FALLING);
 
 function makeBoard(arr: string[][] = board, playable: string[], voidZone: string[]): string[][] {
@@ -182,6 +182,7 @@ class RythmEngine {
     constructor() {
         this.board = makeBoard(board, playableZone, voidZone); // initializes the board, add void ig
         boardPrint(this.board);
+        this.startSettings();
     }
 
     startGame(){ // does everything
@@ -197,7 +198,7 @@ class RythmEngine {
         this.speed = setDifficulty("easy");
     }
     startInterval(){ //this should print out the board, and basically run the game.
-        this.interval = setInterval(this.startGame,this.speed);
+        this.interval = setInterval(() => this.startGame(),this.speed);
     }
 
     stopInterval(){

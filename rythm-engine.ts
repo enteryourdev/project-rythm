@@ -57,6 +57,7 @@ function makeBoard(arr: string[][] = board, playable: string[], voidZone: string
 function boardPrint(arr: string[][]){
     //this prints the board, it takes in setInterval numer input
     //call fall(); per interval 
+    console.log(arr.map(row => row.map(c => `[${c}]`).join(" ")).join("\n"));
 }
 
 function makePlayableZone() {

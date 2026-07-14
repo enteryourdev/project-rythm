@@ -13,6 +13,10 @@ glowing arrows or different looking arrows <- ← so its noticable
 
 question i need to ask:
 is it possible to overlay so it can actually overlap the text
+
+
+bug log:
+7/14/2028 - the frist key arrows disappear, it needs to be reinstated everytime.
 */
 import { pointRinger } from "./score";
 
@@ -48,7 +52,7 @@ function makeBoard(arr: string[][] = board, playable: string[], voidZone: string
     //it 
     console.log(arr.map(row => row.map(c => `[${c}]`).join(" ")).join("\n"));
     console.log(playable.map(c => `[${c}]`).join(" "));
-    const newArray = arr.concat([playable], [voidZone]);
+    const newArray = arr.concat([[...playable]], [[...voidZone]]);
     CATCH_ROW = newArray.length-2
     VOID_ROW = newArray.length-1
     return newArray;
@@ -135,7 +139,7 @@ function fallPlayableZone(arr: string[]): string[]{
     }
     return arr
 }
-export function fallVoidZone(arr: string[]): string[]{
+function fallVoidZone(arr: string[]): string[]{
     //how many is in here? if its here, minus points for each one.
     let totalMiss = 0;
     for (let i = 0; i < arr.length; i++){
@@ -184,6 +188,8 @@ class RythmEngine {
         this.board = makeBoard(board, playableZone, voidZone); // initializes the board, add void ig
         boardPrint(this.board);
         this.startSettings();
+
+        this.startInterval();
     }
 
     startGame(){ // does everything

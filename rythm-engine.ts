@@ -16,7 +16,18 @@ is it possible to overlay so it can actually overlap the text
 
 
 bug log:
-7/14/2028 - the frist key arrows disappear, it needs to be reinstated everytime.
+7/14/2028 - the frist key arrows disappear, it needs to be reinstated everytime. 
+
+
+
+current tackle: 
+i need a function that records what buttons are available at catch row.
+in that function i will have performance.now(); immediately after it is available.
+
+and i need a function after a keypress listener
+keypress listener will go to isValid. it will see if there is a button matching there.
+> if so then it will get performance.now() then... 
+> if not minus point inputed too fast or slow!
 */
 import { pointRinger } from "./score";
 
@@ -46,6 +57,12 @@ let CATCH_ROW: number = 0;
 let VOID_ROW: number = 0;
 const FALLING: Record<string, string> = { "←": "<", "→": ">", "↑": "^", "↓": "⌄" };
 const FALLING_NOTE = Object.values(FALLING);
+let CATCH_MS: Record<string, number> = {
+    "<": 0,
+    ">": 0,
+    "^": 0,
+    "⌄": 0
+}
 
 function makeBoard(arr: string[][] = board, playable: string[], voidZone: string[]): string[][] {
     //this function will create the board and playable zone
@@ -70,12 +87,15 @@ function boardPrint(arr: string[][]){
 );*/
 }
 
-function makePlayableZone() {
-    //this is where you can play the zone
+export function isValidInput(arr: string[][]) { // get the catch row only and scan using i++ 
+    //
 }
 
-function readInput() {
+export function readInput(keyTime: number): number {
     //this is where it recognizes the input
+    //you can use process.stdin.on('data', (key) => { ... }) for Node.js
+    //
+    const inputTime = performance.now(); //as soon as you're correct input is put.
 }
 
 

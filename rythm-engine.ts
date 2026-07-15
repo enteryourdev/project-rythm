@@ -51,7 +51,7 @@ function makeBoard(arr: string[][] = board, playable: string[], voidZone: string
     //this function will create the board and playable zone
     //it 
     console.log(arr.map(row => row.map(c => `[${c}]`).join(" ")).join("\n"));
-    console.log(playable.map(c => `[${c}]`).join(" "));
+    console.log(playable.map(c => `\x1b[32m[${c}]\x1b[0m`).join(" "));
     const newArray = arr.concat([[...playable]], [[...voidZone]]);
     CATCH_ROW = newArray.length-2
     VOID_ROW = newArray.length-1
@@ -62,6 +62,12 @@ function boardPrint(arr: string[][]){
     //this prints the board, it takes in setInterval numer input
     //call fall(); per interval 
     console.log(arr.map(row => row.map(c => `[${c}]`).join(" ")).join("\n"));
+
+/*    console.log(
+  arr.map((row, i) =>
+    row.map(c => i === CATCH_ROW ? `\x1b[32m[${c}]\x1b[0m` : `[${c}]`).join(" ")
+  ).join("\n")
+);*/
 }
 
 function makePlayableZone() {
@@ -78,6 +84,7 @@ function randomKeySpawn(arr: string[][]): string[][] {
 
     //find if there is empty first.
     const emptyCells: number[] = [];
+    
     for (let i = 0; i < arr[0].length; i++){
         if(arr[0][i] === " ") emptyCells.push(i);
     }
@@ -116,6 +123,10 @@ function spawn(arr: string[][]): string[][] {
 }
 
 function fall(arr: string[][]): string[][]{
+
+    //if(arr[VOID_ROW].some(x => x !== " ")) arr[VOID_ROW] = fallVoidZone(arr[VOID_ROW]); // i put this up here to check.
+
+
     for (let i = arr.length - 2; i >= 0; i--){
         for (let j = 0; j < arr[i].length; j++ ){
             if (arr[i][j] !== " "){
@@ -125,6 +136,7 @@ function fall(arr: string[][]): string[][]{
         }
     }//arr[VOID_ROW] = [" ", " ", " ", " "];
     // combos -> arr[VOID_ROW].some(x => Object.values(FALLING).includes(x))
+
     if(arr[VOID_ROW].some(x => x !== " ")) arr[VOID_ROW] = fallVoidZone(arr[VOID_ROW]);
     if(arr[CATCH_ROW].includes(" ")) arr[CATCH_ROW] = fallPlayableZone(arr[CATCH_ROW]);
 

@@ -28,6 +28,7 @@ and i need a function after a keypress listener
 keypress listener will go to isValid. it will see if there is a button matching there.
 > if so then it will get performance.now() then... 
 > if not minus point inputed too fast or slow!
+> I need to figure out how to record values
 */
 import { pointRinger } from "./score";
 
@@ -87,15 +88,20 @@ function boardPrint(arr: string[][]){
 );*/
 }
 
-export function isValidInput(arr: string[][]) { // get the catch row only and scan using i++ 
+export function isValidInput(arr: string[][], keyInput: typeof CATCH_MS) { // get the catch row only and scan using i++ 
     //
 }
 
-export function readInput(keyTime: number): number {
+export function readInput(keyTime: number, keyInput: typeof CATCH_MS): number {
     //this is where it recognizes the input
     //you can use process.stdin.on('data', (key) => { ... }) for Node.js
     //
     const inputTime = performance.now(); //as soon as you're correct input is put.
+
+
+}
+export function valueTimer(arr: string[]){
+
 }
 
 
@@ -159,6 +165,7 @@ function fall(arr: string[][]): string[][]{
 
     if(arr[VOID_ROW].some(x => x !== " ")) arr[VOID_ROW] = fallVoidZone(arr[VOID_ROW]);
     if(arr[CATCH_ROW].includes(" ")) arr[CATCH_ROW] = fallPlayableZone(arr[CATCH_ROW]);
+    if(arr[CATCH_ROW].some(x => FALLING_NOTE.includes(x))) valueTimer(arr[CATCH_ROW]);
 
     return arr
 }

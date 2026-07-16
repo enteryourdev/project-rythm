@@ -64,6 +64,7 @@ let CATCH_MS: Record<string, number> = {
     "^": 0,
     "⌄": 0
 }
+const CATCHING_NOTE = Object.keys(CATCH_MS);
 
 function makeBoard(arr: string[][] = board, playable: string[], voidZone: string[]): string[][] {
     //this function will create the board and playable zone
@@ -92,16 +93,29 @@ export function isValidInput(arr: string[][], keyInput: typeof CATCH_MS) { // ge
     //
 }
 
-export function readInput(keyTime: number, keyInput: typeof CATCH_MS): number {
+export function readInput(note: string): number{
     //this is where it recognizes the input
     //you can use process.stdin.on('data', (key) => { ... }) for Node.js
     //
     const inputTime = performance.now(); //as soon as you're correct input is put.
 
-
+    if (elapsedTime(note) < 500){
+        return elapsedTime(note)
+        CATCH_MS[note] = 0;
+    }else{
+        return pointRinger(-1)//missed minus points
+    }
 }
 export function valueTimer(arr: string[]){
+    const startTime = performance.now();
+    const found = arr.filter(x => FALLING_NOTE.includes(x));
 
+    for (let i = 0; i < found.length; i++){
+        CATCH_MS[found[i]] = startTime; //start the timer
+    }
+}
+export function elapsedTime(note: string): number {
+    return performance.now() - CATCH_MS[note];
 }
 
 

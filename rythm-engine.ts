@@ -258,7 +258,7 @@ class RythmEngine {
     //spawn -> fall -> spawns key -> print board
             spawn(this.board);
             fall(this.board);
-            if (Math.random() < 0.4) randomKeySpawn(this.board);
+            if (Math.random() < 0.9) randomKeySpawn(this.board);
             boardPrint(this.board);
     }
 

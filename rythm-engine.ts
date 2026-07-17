@@ -31,7 +31,9 @@ keypress listener will go to isValid. it will see if there is a button matching 
 > I need to figure out how to record values
 */
 import { pointRinger } from "./score";
-
+import { totalScore } from "./score";
+import {reactionScore} from "./score"
+//import * as score from "./score"; //dw
 
 type Millisecond = 300 | 333 | 400 | 500 | 800 | 1000;
 type ArrowDirection = "left" | "right" | "up" | "down";
@@ -81,6 +83,7 @@ function boardPrint(arr: string[][]){
     //this prints the board, it takes in setInterval numer input
     //call fall(); per interval 
     console.log(arr.map(row => row.map(c => `[${c}]`).join(" ")).join("\n"));
+    console.log(`Total Score: ${totalScore}`);
 
 /*    console.log(
   arr.map((row, i) =>
@@ -100,7 +103,7 @@ export function readInput(note: string): number{
     const inputTime = performance.now(); //as soon as you're correct input is put.
 
     if (elapsedTime(note) < 500){
-        return elapsedTime(note)
+        return reactionScore(elapsedTime(note));
         CATCH_MS[note] = 0;
     }else{
         return pointRinger(-1)//missed minus points
@@ -197,7 +200,7 @@ function fallVoidZone(arr: string[]): string[]{
     let totalMiss = 0;
     for (let i = 0; i < arr.length; i++){
             if (FALLING_NOTE.includes(arr[i])){
-                totalMiss++;
+                totalMiss--;
         }
 
         arr[i] = " "

@@ -95,26 +95,26 @@ function boardPrint(arr: string[][]){
 
 export function isValidInput(note: string) { // get the catch row only and scan using i++ 
     //
-    if (CATCHING_VALUE.find(x => x > 0)){
+    //if (CATCHING_VALUE.find(x => x > 0)){
         return readInput(note);
-    }else{
-        console.log("Too FAST!")
+   // }else{
+        //console.log("Too FAST!")
+    //}
+}
+
+export function readInput(note: string): number { // DEEP DIVE
+    const elapsed = elapsedTime(note); // capture BEFORE zeroing, or it reads the wiped stamp
+
+    if (elapsed < rythmEngine.speed) {
+        CATCH_MS[note] = 0;                       // burn the note no double catch
+        const col = rythmEngine.board[CATCH_ROW].indexOf(note);
+        if (col !== -1) rythmEngine.board[CATCH_ROW][col] = " "; // remove from board
+        return reactionScore(elapsed);
+    } else {
+        return pointRinger(-1); // pressed with nothing there / too late
     }
 }
 
-export function readInput(note: string): number{
-    //this is where it recognizes the input
-    //you can use process.stdin.on('data', (key) => { ... }) for Node.js
-    //
-    const inputTime = performance.now(); //as soon as you're correct input is put.
-
-    if (elapsedTime(note) < 500){
-        return reactionScore(elapsedTime(note));
-        CATCH_MS[note] = 0;
-    }else{
-        return pointRinger(-1)//missed minus points
-    }
-}
 export function valueTimer(arr: string[]){
     const startTime = performance.now();
     const found = arr.filter(x => FALLING_NOTE.includes(x));
@@ -211,7 +211,7 @@ function fallVoidZone(arr: string[]): string[]{
 
         arr[i] = " "
     }
-    pointRinger(totalMiss);
+    if (totalMiss < 0) pointRinger(totalMiss);
     return arr
 }
 
@@ -242,7 +242,7 @@ function readSongSheet() {
 */
 
 class RythmEngine {
-    public speed: Millisecond = 500;
+    public speed: Millisecond = 1000;
     public interval?: ReturnType<typeof setInterval>;
     public board: string[][] = [];
 
@@ -258,7 +258,7 @@ class RythmEngine {
     //spawn -> fall -> spawns key -> print board
             spawn(this.board);
             fall(this.board);
-            randomKeySpawn(this.board);
+            if (Math.random() < 0.4) randomKeySpawn(this.board);
             boardPrint(this.board);
     }
 

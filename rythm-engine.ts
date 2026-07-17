@@ -264,7 +264,7 @@ class RythmEngine {
 
     
     startSettings(){
-        this.speed = setDifficulty("easy");
+        this.speed = setDifficulty("hard");
     }
     startInterval(){ //this should print out the board, and basically run the game.
         this.interval = setInterval(() => this.startGame(),this.speed);

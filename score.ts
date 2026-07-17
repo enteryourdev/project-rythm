@@ -27,7 +27,7 @@ export let totalScore: number = 0;
 let totalCorrect = 0;
 
 export function pointRinger(n: number): number{
-    if (n < 0) totalCorrect += 1
+    if (n > 0) totalCorrect += 1
     else totalCorrect = 0; 
 
     const multiplier = comboScore(totalCorrect) ?? 1;

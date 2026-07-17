@@ -30,9 +30,9 @@ keypress listener will go to isValid. it will see if there is a button matching 
 > if not minus point inputed too fast or slow!
 > I need to figure out how to record values
 */
-import { pointRinger } from "./score";
-import { totalScore } from "./score";
-import {reactionScore} from "./score"
+import { pointRinger } from "./score.js";
+import { totalScore } from "./score.js";
+import {reactionScore} from "./score.js"
 //import * as score from "./score"; //dw
 
 type Millisecond = 300 | 333 | 400 | 500 | 800 | 1000;
@@ -67,6 +67,7 @@ let CATCH_MS: Record<string, number> = {
     "⌄": 0
 }
 const CATCHING_NOTE = Object.keys(CATCH_MS);
+const CATCHING_VALUE = Object.values(CATCH_MS);
 
 function makeBoard(arr: string[][] = board, playable: string[], voidZone: string[]): string[][] {
     //this function will create the board and playable zone
@@ -92,8 +93,13 @@ function boardPrint(arr: string[][]){
 );*/
 }
 
-export function isValidInput(arr: string[][], keyInput: typeof CATCH_MS) { // get the catch row only and scan using i++ 
+export function isValidInput(note: string) { // get the catch row only and scan using i++ 
     //
+    if (CATCHING_VALUE.find(x => x > 0)){
+        return readInput(note);
+    }else{
+        console.log("Too FAST!")
+    }
 }
 
 export function readInput(note: string): number{
